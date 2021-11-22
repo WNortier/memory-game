@@ -16,7 +16,6 @@ const Game = () => {
   const [choiceTwo, setChoiceTwo] = useState(null);
 
   const choiceHandler = (card) => {
-    console.log(card);
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
