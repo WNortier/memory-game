@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface");
+
+.cards {
+  font-family: "Abril", sans-serif;
+  display: inline-block;
+  margin: 5px;
+  width: 70px;
+  height: 110px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.cards:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.suit {
+  line-height: 0;
+  font-size: 30px;
+}

@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { cardsActions } from "./store/card-slice";
+import Game from "./components/Game";
+import Container from "react-bootstrap/Container";
+import { useEffect } from "react";
 
 function App() {
+  const cards = useSelector((state) => state.cards.cards);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(cardsActions.shuffle());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid className="App">
+      <h1>Memory Game</h1>
+      {/* <button>New Game</button> */}
+      <Game></Game>
+    </Container>
   );
 }
 
