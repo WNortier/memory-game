@@ -9,7 +9,7 @@ const Card = (props) => {
   // const firstChoice = useSelector((state) => state.cards.firstChoice);
 
   const style = {
-    color: props.color,
+    color: props.card.color,
     fontWeight: "bold",
   };
 
