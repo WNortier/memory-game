@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import { useEffect } from "react";
 
 function App() {
-  const cards = useSelector((state) => state.cards.cards);
+  // const cards = useSelector((state) => state.cards.cards);
   const dispatch = useDispatch();
   useEffect(() => {
     // dispatch(cardsActions.shuffle());

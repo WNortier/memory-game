@@ -4,7 +4,8 @@ body {
   font-family: Raleway, sans-serif;
   margin: 0;
   font-size: 1.5em;
+  font-weight: bold;
   text-align: center;
-  background: #1b1523;
+  background: #68a9d8;
   color: #fff;
 }

@@ -25,6 +25,7 @@ const Card = (props) => {
         choiceHandler(props.card.id);
       }}
       className={classes.cards}
+      style={{ visibility: props.card.matched ? "hidden" : "visible" }}
     >
       <p style={style}>{props.card.value}</p>
       <p style={style} className={classes.suit}>

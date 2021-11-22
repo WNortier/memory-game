@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { cards } from "./cards";
 const initialCardsState = {
   cards,
+  thing: { test: "hello" },
 };
 
 // Now for dispatching actions createSlice has got us covered.
@@ -15,11 +16,15 @@ const cardsSlice = createSlice({
     shuffle(state) {
       state.cards = state.cards.sort(() => Math.random() - 0.5);
     },
-    setFirstChoice(state, action) {
-      state.firstChoice = action.payload;
-    },
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
+    remove(state, action) {
+      state.cards = action.payload;
+      // state.cards.map((card) => {
+      //   console.log(card);
+      // });
+      // state.cards = state.cards.map((card) => console.log(card));
+      //console.log(state.thing);
+      //console.log(action.payload);
+      //state.cards = state.cards.filter((card) => card.id !== action.payload.id);
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
