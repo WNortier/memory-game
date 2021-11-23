@@ -14,7 +14,7 @@
 }
 
 .cards .front {
-  /* transform: rotateY(90deg); */
+  transform: rotateY(90deg);
   position: absolute;
 }
 

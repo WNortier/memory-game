@@ -3,20 +3,24 @@ import classes from "./Game.module.css";
 import Card from "./Card";
 import { useSelector, useDispatch } from "react-redux";
 import { cardsActions } from "../store/card-slice";
+import { playersActions } from "../store/players-slice";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const Game = () => {
+const Game = (props) => {
   const dispatch = useDispatch();
+
+  const playerOneScore = useSelector((state) => state.players.playerOneScore);
+  const playerTwoScore = useSelector((state) => state.players.playerTwoScore);
+  const player = useSelector((state) => state.players.player);
   const cards = useSelector((state) => state.cards.cards);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
-  let [playerOneScore, setPlayerOneScore] = useState(0);
-  let [playerTwoScore, setPlayerTwoScore] = useState(0);
-  const [player, setPlayer] = useState({ playing: "playerOne" });
+  // let [playerOneScore, setPlayerOneScore] = useState(0);
+  // let [playerTwoScore, setPlayerTwoScore] = useState(0);
+  // const [player, setPlayer] = useState({ playing: "playerOne" });
 
   const choiceHandler = (card) => {
-    // console.log(card);
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
@@ -42,27 +46,31 @@ const Game = () => {
         });
         setTimeout(() => {
           dispatch(cardsActions.update(updateChoiceTwo));
-        }, 2000);
-        //dispatch(cardsActions.remove(choiceTwo));
-        if (player.playing === "playerOne") {
-          setPlayerOneScore((prevScore) => prevScore + 1);
-          setPlayer({ playing: "playerTwo" });
+        }, 1250);
+        if (player === "playerOne") {
+          // setPlayerOneScore((prevScore) => prevScore + 1);
+          dispatch(playersActions.addScorePlayerOne());
+          dispatch(playersActions.setPlayerTwoPlaying());
+          // setPlayer({ playing: "playerTwo" });
         } else {
-          setPlayerTwoScore((prevScore) => prevScore + 1);
-          setPlayer({ playing: "playerOne" });
+          dispatch(playersActions.addScorePlayerTwo());
+          // setPlayerTwoScore((prevScore) => prevScore + 1);
+          // setPlayer({ playing: "playerOne" });
+          dispatch(playersActions.setPlayerOnePlaying());
         }
         setTimeout(() => {
           resetRound();
-        }, 2000);
+        }, 1250);
       } else {
-        if (player.playing === "playerOne") {
-          setPlayer({ playing: "playerTwo" });
+        if (player === "playerOne") {
+          // setPlayer({ playing: "playerTwo" });
+          dispatch(playersActions.setPlayerTwoPlaying());
         } else {
-          setPlayer({ playing: "playerOne" });
+          dispatch(playersActions.setPlayerOnePlaying());
         }
         setTimeout(() => {
           resetRound();
-        }, 2000);
+        }, 1250);
       }
     }
   }, [choiceOne, choiceTwo]);
@@ -75,9 +83,9 @@ const Game = () => {
   return (
     <Row>
       <Col md={3}>
-        <h3>Player1</h3>
+        <h3>{props.playerOneName}</h3>
         <p>{playerOneScore}</p>
-        {player.playing === "playerOne" && <p>It's your turn</p>}
+        {player === "playerOne" && <p>It's your turn</p>}
       </Col>
       <Col md={6}>
         {cards.map((card) => {
@@ -92,9 +100,9 @@ const Game = () => {
         })}
       </Col>
       <Col md={3}>
-        <h3>Player2</h3>
+        <h3>{props.playerTwoName}</h3>
         <p>{playerTwoScore}</p>
-        {player.playing === "playerTwo" && <p>It's your turn</p>}
+        {player === "playerTwo" && <p>It's your turn</p>}
       </Col>
     </Row>
   );
