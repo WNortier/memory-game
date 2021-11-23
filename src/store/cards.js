@@ -51,6 +51,6 @@ export const cards = [
   { id: 50, value: "J", suit: "♣", color: "black" },
   { id: 51, value: "Q", suit: "♣", color: "black" },
   { id: 52, value: "K", suit: "♣", color: "black" },
-  { id: 53, value: "Joker", suit: "J", color: "black" },
-  { id: 54, value: "Joker", suit: "J", color: "black" },
+  { id: 53, value: "Joker", suit: "J1", color: "black" },
+  { id: 54, value: "Joker", suit: "J2", color: "black" },
 ];

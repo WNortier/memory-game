@@ -1,0 +1,9 @@
+.deck {
+  background: linear-gradient(
+    133.05deg,
+    rgba(255, 255, 255, 0.6) 0.62%,
+    rgba(255, 255, 255, 0.1) 102.4%
+  );
+  border-radius: 3px;
+  padding: 15px;
+}

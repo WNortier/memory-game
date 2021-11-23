@@ -6,9 +6,14 @@ import { cardsActions } from "../store/card-slice";
 import { playersActions } from "../store/players-slice";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
 
 const Game = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const playerOneName = useSelector((state) => state.players.playerOneName);
+  const playerTwoName = useSelector((state) => state.players.playerTwoName);
 
   const playerOneScore = useSelector((state) => state.players.playerOneScore);
   const playerTwoScore = useSelector((state) => state.players.playerTwoScore);
@@ -28,16 +33,17 @@ const Game = (props) => {
     if (choiceOne && choiceTwo) {
       if (
         choiceOne.value === choiceTwo.value &&
-        choiceOne.color === choiceTwo.color
+        choiceOne.color === choiceTwo.color &&
+        choiceOne.suit !== choiceTwo.suit
       ) {
-        const updateChoiceOne = cards.map((card) => {
+        const setMatchedChoiceOne = cards.map((card) => {
           if (card.id === choiceOne.id) {
             return { ...card, matched: true };
           } else {
             return card;
           }
         });
-        const updateChoiceTwo = updateChoiceOne.map((card) => {
+        const setMatchedChoiceTwo = setMatchedChoiceOne.map((card) => {
           if (card.id === choiceTwo.id) {
             return { ...card, matched: true };
           } else {
@@ -45,7 +51,7 @@ const Game = (props) => {
           }
         });
         setTimeout(() => {
-          dispatch(cardsActions.update(updateChoiceTwo));
+          dispatch(cardsActions.update(setMatchedChoiceTwo));
         }, 1250);
         if (player === "playerOne") {
           // setPlayerOneScore((prevScore) => prevScore + 1);
@@ -75,6 +81,15 @@ const Game = (props) => {
     }
   }, [choiceOne, choiceTwo]);
 
+  useEffect(() => {
+    if (playerOneScore + playerTwoScore === 27) {
+      dispatch(cardsActions.resetCards());
+      dispatch(playersActions.setIsPlaying(false));
+      localStorage.setItem("isPlaying", false);
+      navigate("/scores", { replace: true });
+    }
+  }, [choiceOne, choiceTwo]);
+
   const resetRound = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -83,11 +98,11 @@ const Game = (props) => {
   return (
     <Row>
       <Col md={3}>
-        <h3>{props.playerOneName}</h3>
+        <h3>{playerOneName}</h3>
         <p>{playerOneScore}</p>
         {player === "playerOne" && <p>It's your turn</p>}
       </Col>
-      <Col md={6}>
+      <Col md={6} className={classes.deck}>
         {cards.map((card) => {
           return (
             <Card
@@ -100,7 +115,7 @@ const Game = (props) => {
         })}
       </Col>
       <Col md={3}>
-        <h3>{props.playerTwoName}</h3>
+        <h3>{playerTwoName}</h3>
         <p>{playerTwoScore}</p>
         {player === "playerTwo" && <p>It's your turn</p>}
       </Col>

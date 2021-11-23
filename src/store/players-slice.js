@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialCardsState = {
+  playerOneName: "",
+  playerTwoName: "",
   playerOneScore: 0,
   playerTwoScore: 0,
   player: "playerOne",
@@ -23,13 +25,19 @@ const playersSlice = createSlice({
     setPlayerTwoPlaying(state) {
       state.player = "playerTwo";
     },
+    setPlayerOneName(state, action) {
+      state.playerOneName = action.payload;
+    },
+    setPlayerTwoName(state, action) {
+      state.playerTwoName = action.payload;
+    },
     resetScores(state) {
       state.player = "playerOne";
       state.playerOneScore = 0;
       state.playerTwoScore = 0;
     },
-    setIsPlaying(state) {
-      state.isPlaying = !state.isPlaying;
+    setIsPlaying(state, action) {
+      state.isPlaying = action.payload;
     },
   },
 });

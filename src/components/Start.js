@@ -1,25 +1,52 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import classes from "./Start.module.css";
 import { useNavigate } from "react-router-dom";
 import { playersActions } from "../store/players-slice";
+import { cardsActions } from "../store/card-slice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Start = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const playerOneName = useSelector((state) => state.players.playerOneName);
+  const playerTwoName = useSelector((state) => state.players.playerTwoName);
+  const [playerOneTouched, setPlayerOneTouched] = useState(false);
+  const [playerTwoTouched, setPlayerTwoTouched] = useState(false);
+
+  const playerOneNameIsValid = playerOneName.trim().length > 0;
+  const playerOneNameInputInvalid = !playerOneNameIsValid && playerOneTouched;
+
+  const playerTwoNameIsValid = playerTwoName.trim().length > 0;
+  const playerTwoNameInputInvalid = !playerTwoNameIsValid && playerTwoTouched;
+
+  let inputsValid = false;
+
+  if (playerOneNameIsValid && playerTwoNameIsValid) {
+    inputsValid = true;
+  }
+
+  const playerOneBlurHandler = () => {
+    setPlayerOneTouched(true);
+  };
+
+  const playerTwoBlurHandler = () => {
+    setPlayerTwoTouched(true);
+  };
+
   const playerOneNameHandler = (e) => {
-    props.onSetPlayerOneName(e.target.value);
+    dispatch(playersActions.setPlayerOneName(e.target.value));
   };
 
   const playerTwoNameHandler = (e) => {
-    props.onSetPlayerTwoName(e.target.value);
+    dispatch(playersActions.setPlayerTwoName(e.target.value));
   };
 
   const newGameHandler = () => {
     navigate("/game", { replace: true });
     dispatch(playersActions.setIsPlaying());
+    localStorage.setItem("isPlaying", true);
   };
 
   return (
@@ -32,19 +59,31 @@ const Start = (props) => {
           <input
             type="text"
             onChange={playerOneNameHandler}
+            onBlur={playerOneBlurHandler}
             placeholder="Name of Player 1"
           ></input>
+          {playerOneNameInputInvalid && (
+            <p className={classes.error}>Name may not be empty</p>
+          )}
         </Col>
         <Col md={6}>
           <input
             type="text"
             onChange={playerTwoNameHandler}
+            onBlur={playerTwoBlurHandler}
             placeholder="Name of Player 2"
           ></input>
+          {playerTwoNameInputInvalid && (
+            <p className={classes.error}>Name may not be empty</p>
+          )}
         </Col>
         <div>
           {" "}
-          <button className={classes.startBtn} onClick={newGameHandler}>
+          <button
+            disabled={!inputsValid}
+            className={classes.startBtn}
+            onClick={newGameHandler}
+          >
             New Game
           </button>{" "}
         </div>

@@ -15,7 +15,7 @@ const cardsSlice = createSlice({
     update(state, action) {
       state.cards = action.payload;
     },
-    reset(state) {
+    resetCards(state) {
       console.log("in here");
       state.cards = cards;
     },

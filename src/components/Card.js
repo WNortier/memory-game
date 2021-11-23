@@ -1,12 +1,9 @@
 import React from "react";
 import classes from "./Card.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { cardsActions } from "../store/card-slice";
+import { useSelector } from "react-redux";
 
 const Card = (props) => {
-  // const dispatch = useDispatch();
   const cards = useSelector((state) => state.cards.cards);
-  // const firstChoice = useSelector((state) => state.cards.firstChoice);
 
   const style = {
     color: props.card.color,
@@ -14,7 +11,6 @@ const Card = (props) => {
   };
 
   const choiceHandler = (id) => {
-    // dispatch(cardsActions.setFirstChoice(id));
     const selected = cards.find((card) => card.id === id);
     props.choiceHandler(selected);
   };

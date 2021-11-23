@@ -5,6 +5,7 @@ import { playersActions } from "./store/players-slice";
 import { Route, Routes } from "react-router-dom";
 import Game from "./components/Game";
 import Start from "./components/Start";
+import Scores from "./components/Scores";
 import Container from "react-bootstrap/Container";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
@@ -15,7 +16,9 @@ function App() {
   // const cards = useSelector((state) => state.cards.cards);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isPlaying = useSelector((state) => state.players.isPlaying);
+  const isPlaying =
+    useSelector((state) => state.players.isPlaying) ||
+    JSON.parse(localStorage.getItem("isPlaying"));
 
   useEffect(() => {
     // dispatch(cardsActions.shuffle());
@@ -25,20 +28,20 @@ function App() {
   const [playerTwoName, setPlayerTwoName] = useState(null);
 
   const restartGameHandler = () => {
-    dispatch(cardsActions.reset());
+    dispatch(cardsActions.resetCards());
     dispatch(playersActions.resetScores());
   };
 
   const exitGameHandler = () => {
-    dispatch(cardsActions.reset());
+    dispatch(cardsActions.resetCards());
     dispatch(playersActions.resetScores());
-    dispatch(playersActions.setIsPlaying());
+    dispatch(playersActions.setIsPlaying(false));
+    localStorage.setItem("isPlaying", false);
     navigate("/", { replace: true });
   };
 
   return (
     <Container fluid className="App">
-      {console.log(playerOneName)}
       <Row>
         <Col md={7}>
           <div className={classes.main}>
@@ -81,6 +84,7 @@ function App() {
             />
           }
         ></Route>
+        <Route path="/scores" element={<Scores />}></Route>
       </Routes>
     </Container>
   );

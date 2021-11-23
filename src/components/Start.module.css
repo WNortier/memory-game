@@ -23,3 +23,13 @@ input {
   opacity: 0.9;
   color: #fff;
 }
+
+.startBtn:disabled,
+.startBtn:disabled:hover,
+.startBtn:disabled:active {
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d4190c;
+}
