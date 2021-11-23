@@ -40,7 +40,9 @@ const Game = () => {
             return card;
           }
         });
-        dispatch(cardsActions.remove(updateChoiceTwo));
+        setTimeout(() => {
+          dispatch(cardsActions.update(updateChoiceTwo));
+        }, 2000);
         //dispatch(cardsActions.remove(choiceTwo));
         if (player.playing === "playerOne") {
           setPlayerOneScore((prevScore) => prevScore + 1);
@@ -49,15 +51,18 @@ const Game = () => {
           setPlayerTwoScore((prevScore) => prevScore + 1);
           setPlayer({ playing: "playerOne" });
         }
-        resetRound();
+        setTimeout(() => {
+          resetRound();
+        }, 2000);
       } else {
-        console.log("those cards don't match");
         if (player.playing === "playerOne") {
           setPlayer({ playing: "playerTwo" });
         } else {
           setPlayer({ playing: "playerOne" });
         }
-        resetRound();
+        setTimeout(() => {
+          resetRound();
+        }, 2000);
       }
     }
   }, [choiceOne, choiceTwo]);
@@ -77,7 +82,12 @@ const Game = () => {
       <Col md={6}>
         {cards.map((card) => {
           return (
-            <Card key={card.id} card={card} choiceHandler={choiceHandler} />
+            <Card
+              key={card.id}
+              card={card}
+              choiceHandler={choiceHandler}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+            />
           );
         })}
       </Col>

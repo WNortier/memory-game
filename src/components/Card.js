@@ -27,10 +27,15 @@ const Card = (props) => {
       className={classes.cards}
       style={{ visibility: props.card.matched ? "hidden" : "visible" }}
     >
-      <p style={style}>{props.card.value}</p>
-      <p style={style} className={classes.suit}>
-        {props.card.suit}
-      </p>
+      {console.log(props.flipped)}
+      <div className={props.flipped ? classes.flipped : ""}>
+        <div className={classes.front}>
+          <p style={style}>{props.card.value}</p>
+          <p style={style} className={classes.suit}>
+            {props.card.suit}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const cardsSlice = createSlice({
     shuffle(state) {
       state.cards = state.cards.sort(() => Math.random() - 0.5);
     },
-    remove(state, action) {
+    update(state, action) {
       state.cards = action.payload;
       // state.cards.map((card) => {
       //   console.log(card);
