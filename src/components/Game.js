@@ -12,8 +12,12 @@ const Game = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const playerOneName = useSelector((state) => state.players.playerOneName);
-  const playerTwoName = useSelector((state) => state.players.playerTwoName);
+  const playerOneName =
+    useSelector((state) => state.players.playerOneName) ||
+    localStorage.getItem("playerOneName");
+  const playerTwoName =
+    useSelector((state) => state.players.playerTwoName) ||
+    localStorage.getItem("playerTwoName");
   const playerOneScore = useSelector((state) => state.players.playerOneScore);
   const playerTwoScore = useSelector((state) => state.players.playerTwoScore);
   const player = useSelector((state) => state.players.player);
@@ -29,11 +33,13 @@ const Game = (props) => {
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      console.log("yes");
       if (
         choiceOne.value === choiceTwo.value &&
         choiceOne.color === choiceTwo.color &&
         choiceOne.suit !== choiceTwo.suit
       ) {
+        console.log("match");
         const setMatchedChoiceOne = cards.map((card) => {
           if (card.id === choiceOne.id) {
             return { ...card, matched: true };
@@ -57,23 +63,23 @@ const Game = (props) => {
             setShowCards(true);
           }, 1500);
         }, 1250);
-        if (player === "playerOne") {
-          dispatch(playersActions.addScorePlayerOne());
-          dispatch(playersActions.setPlayerTwoPlaying());
-        } else {
-          dispatch(playersActions.addScorePlayerTwo());
-          dispatch(playersActions.setPlayerOnePlaying());
-        }
         setTimeout(() => {
+          if (player === "playerOne") {
+            dispatch(playersActions.addScorePlayerOne());
+            dispatch(playersActions.setPlayerTwoPlaying());
+          } else {
+            dispatch(playersActions.addScorePlayerTwo());
+            dispatch(playersActions.setPlayerOnePlaying());
+          }
           resetRound();
-        }, 1250);
+        }, 2750);
       } else {
-        if (player === "playerOne") {
-          dispatch(playersActions.setPlayerTwoPlaying());
-        } else {
-          dispatch(playersActions.setPlayerOnePlaying());
-        }
         setTimeout(() => {
+          if (player === "playerOne") {
+            dispatch(playersActions.setPlayerTwoPlaying());
+          } else {
+            dispatch(playersActions.setPlayerOnePlaying());
+          }
           resetRound();
         }, 1250);
       }
@@ -82,6 +88,7 @@ const Game = (props) => {
 
   useEffect(() => {
     if (playerOneScore + playerTwoScore === 27) {
+      dispatch(playersActions.setIsScores(false));
       dispatch(cardsActions.resetCards());
       dispatch(playersActions.setIsPlaying(false));
       localStorage.setItem("isPlaying", false);

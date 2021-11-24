@@ -15,6 +15,7 @@ input {
   font-weight: bold;
   border-radius: 5px;
   width: 374px;
+  margin-top: 20px;
 }
 
 .startBtn {
@@ -38,10 +39,6 @@ input {
 .startBtn:disabled:hover,
 .startBtn:disabled:active {
   cursor: not-allowed;
-}
-
-img {
-  margin-bottom: 50px;
 }
 
 .error {

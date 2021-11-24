@@ -2,21 +2,24 @@
   margin-top: 5%;
 }
 
-.heading h2 {
-  font-size: 45px;
-  font-weight: bold;
+.message {
+  font-size: 48px;
+}
+
+.winner {
+  font-size: 72px;
 }
 
 .playBtn {
-  margin: 50px;
+  margin-top: 43px;
   background: #a7daff;
   border: none;
-  padding: 6px 12px;
+  padding: 16px 20px;
   border-radius: 4px;
-  color: #fff;
+  color: #164464;
   font-weight: bold;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 .playBtn:hover {
@@ -42,6 +45,18 @@
 
 .secondPlace {
   background: #fff;
+}
+
+.firstPlace p,
+.secondPlace p {
+  width: 100px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.scoreImg {
+  width: 100px;
+  height: 55px;
 }
 
 .firstPlace p,

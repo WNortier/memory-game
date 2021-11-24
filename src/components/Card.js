@@ -23,7 +23,6 @@ const Card = (props) => {
       className={classes.cards}
       style={{ visibility: props.card.matched ? "hidden" : "visible" }}
     >
-      {console.log(props.flipped)}
       <div className={props.flipped ? classes.flipped : ""}>
         <div className={classes.front}>
           <p style={style}>{props.card.value}</p>

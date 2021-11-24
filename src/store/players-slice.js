@@ -7,6 +7,7 @@ const initialCardsState = {
   playerTwoScore: 0,
   player: "playerOne",
   isPlaying: false,
+  notScores: true,
 };
 
 const playersSlice = createSlice({
@@ -38,6 +39,9 @@ const playersSlice = createSlice({
     },
     setIsPlaying(state, action) {
       state.isPlaying = action.payload;
+    },
+    setIsScores(state, action) {
+      state.notScores = action.payload;
     },
   },
 });

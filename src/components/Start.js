@@ -43,6 +43,8 @@ const Start = (props) => {
   };
 
   const newGameHandler = () => {
+    localStorage.setItem("playerOneName", playerOneName);
+    localStorage.setItem("playerTwoName", playerTwoName);
     navigate("/game", { replace: true });
     dispatch(playersActions.setIsPlaying());
     localStorage.setItem("isPlaying", true);
@@ -73,7 +75,9 @@ const Start = (props) => {
           </Col>
           <Col md={3}>
             <div className={classes.playerTwo}>
-              <img src="/img/Player_2.svg" alt="Player 2" />
+              <div>
+                <img src="/img/Player_2.svg" alt="Player 2" />
+              </div>
               <input
                 type="text"
                 onChange={playerTwoNameHandler}

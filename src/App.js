@@ -16,6 +16,7 @@ function App() {
   // const cards = useSelector((state) => state.cards.cards);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notScores = useSelector((state) => state.players.notScores);
   const isPlaying =
     useSelector((state) => state.players.isPlaying) ||
     JSON.parse(localStorage.getItem("isPlaying"));
@@ -32,6 +33,10 @@ function App() {
     dispatch(playersActions.resetScores());
   };
 
+  const shuffleGameHandler = () => {
+    dispatch(cardsActions.shuffle());
+  };
+
   const exitGameHandler = () => {
     dispatch(cardsActions.resetCards());
     dispatch(playersActions.resetScores());
@@ -43,14 +48,22 @@ function App() {
   return (
     <Container fluid className="App">
       <Row>
-        <Col md={7}>
-          <div className={classes.main}>
-            <h1>Memory Game</h1>
-          </div>
-        </Col>
+        {notScores && (
+          <Col md={7}>
+            <div className={classes.main}>
+              <h1>Memory Game</h1>
+            </div>
+          </Col>
+        )}
         <Col md={5}>
           {isPlaying && (
             <div className={classes.btnGroup}>
+              <button
+                className={classes.shuffleBtn}
+                onClick={shuffleGameHandler}
+              >
+                Shuffle
+              </button>
               <button
                 className={classes.restartBtn}
                 onClick={restartGameHandler}
