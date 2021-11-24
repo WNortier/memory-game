@@ -1,17 +1,27 @@
+.startContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading h1 {
-  margin: 150px;
+  margin: 80px;
   font-weight: bold;
 }
 
 input {
   outline: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 374px;
 }
 
 .startBtn {
-  margin: 50px;
+  margin-top: 95px;
   background: #0ab169;
   border: none;
-  padding: 6px 12px;
+  padding: 10px 40px;
   border-radius: 4px;
   color: #fff;
   font-weight: bold;
@@ -30,6 +40,12 @@ input {
   cursor: not-allowed;
 }
 
+img {
+  margin-bottom: 50px;
+}
+
 .error {
+  position: absolute;
   color: #d4190c;
+  margin-left: 55px;
 }

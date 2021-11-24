@@ -1,3 +1,9 @@
+.deckContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .deck {
   background: linear-gradient(
     133.05deg,
@@ -6,4 +12,48 @@
   );
   border-radius: 3px;
   padding: 15px;
+  height: 825px;
+  width: 800px;
+}
+
+.playerOneColumn,
+.playerTwoColumn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.playerOne,
+.playerTwo {
+  border-radius: 7px;
+  background: linear-gradient(
+    133.05deg,
+    rgba(255, 255, 255, 0.6) 0.62%,
+    rgba(255, 255, 255, 0.1) 102.4%
+  );
+  padding: 20px;
+}
+
+.playerOneTurn {
+  margin-top: 10px;
+  width: 220px;
+  border-radius: 7px;
+  background: #0ab169;
+}
+
+.playerTwoTurn {
+  margin-top: 10px;
+  width: 220px;
+  border-radius: 7px;
+  margin-top: 10px;
+  background: #fff;
+  color: #489dda;
+}
+
+.playerOneTurn p,
+.playerTwoTurn p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

@@ -14,16 +14,14 @@ const Game = (props) => {
 
   const playerOneName = useSelector((state) => state.players.playerOneName);
   const playerTwoName = useSelector((state) => state.players.playerTwoName);
-
   const playerOneScore = useSelector((state) => state.players.playerOneScore);
   const playerTwoScore = useSelector((state) => state.players.playerTwoScore);
   const player = useSelector((state) => state.players.player);
   const cards = useSelector((state) => state.cards.cards);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
-  // let [playerOneScore, setPlayerOneScore] = useState(0);
-  // let [playerTwoScore, setPlayerTwoScore] = useState(0);
-  // const [player, setPlayer] = useState({ playing: "playerOne" });
+  const [showMatch, setShowMatch] = useState(false);
+  const [showCards, setShowCards] = useState(true);
 
   const choiceHandler = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
@@ -52,16 +50,18 @@ const Game = (props) => {
         });
         setTimeout(() => {
           dispatch(cardsActions.update(setMatchedChoiceTwo));
+          setShowCards(false);
+          setShowMatch(true);
+          setTimeout(() => {
+            setShowMatch(false);
+            setShowCards(true);
+          }, 1500);
         }, 1250);
         if (player === "playerOne") {
-          // setPlayerOneScore((prevScore) => prevScore + 1);
           dispatch(playersActions.addScorePlayerOne());
           dispatch(playersActions.setPlayerTwoPlaying());
-          // setPlayer({ playing: "playerTwo" });
         } else {
           dispatch(playersActions.addScorePlayerTwo());
-          // setPlayerTwoScore((prevScore) => prevScore + 1);
-          // setPlayer({ playing: "playerOne" });
           dispatch(playersActions.setPlayerOnePlaying());
         }
         setTimeout(() => {
@@ -69,7 +69,6 @@ const Game = (props) => {
         }, 1250);
       } else {
         if (player === "playerOne") {
-          // setPlayer({ playing: "playerTwo" });
           dispatch(playersActions.setPlayerTwoPlaying());
         } else {
           dispatch(playersActions.setPlayerOnePlaying());
@@ -98,26 +97,51 @@ const Game = (props) => {
   return (
     <Row>
       <Col md={3}>
-        <h3>{playerOneName}</h3>
-        <p>{playerOneScore}</p>
-        {player === "playerOne" && <p>It's your turn</p>}
+        <div className={classes.playerOneColumn}>
+          <div className={classes.playerOne}>
+            <img src="/img/Player_1.svg" alt="Player 1" />
+            <h3>{playerOneName}</h3>
+            <p>{playerOneScore}</p>
+          </div>
+          {player === "playerOne" && (
+            <div className={classes.playerOneTurn}>
+              <p>It's Your Turn</p>
+            </div>
+          )}
+        </div>
       </Col>
-      <Col md={6} className={classes.deck}>
-        {cards.map((card) => {
-          return (
-            <Card
-              key={card.id}
-              card={card}
-              choiceHandler={choiceHandler}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-            />
-          );
-        })}
+      <Col md={6}>
+        <div className={classes.deckContainer}>
+          {showMatch && <img src="/img/Match.svg" alt="Player 2" />}
+          {showCards && (
+            <div className={classes.deck}>
+              {cards.map((card) => {
+                return (
+                  <Card
+                    key={card.id}
+                    card={card}
+                    choiceHandler={choiceHandler}
+                    flipped={
+                      card === choiceOne || card === choiceTwo || card.matched
+                    }
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
       </Col>
       <Col md={3}>
-        <h3>{playerTwoName}</h3>
-        <p>{playerTwoScore}</p>
-        {player === "playerTwo" && <p>It's your turn</p>}
+        <div className={classes.playerTwoColumn}>
+          <div className={classes.playerTwo}>
+            <img src="/img/Player_2.svg" alt="Player 2" />
+            <h3>{playerTwoName}</h3>
+            <p>{playerTwoScore}</p>
+          </div>
+          <div className={classes.playerTwoTurn}>
+            {player === "playerTwo" && <p>It's your turn</p>}
+          </div>
+        </div>
       </Col>
     </Row>
   );

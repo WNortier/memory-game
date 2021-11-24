@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { playersActions } from "../store/players-slice";
 import { cardsActions } from "../store/card-slice";
 import { useSelector, useDispatch } from "react-redux";
-
 const Start = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,28 +54,38 @@ const Start = (props) => {
         <h1>Are you ready to play?</h1>
       </div>
       <Row>
-        <Col md={6}>
-          <input
-            type="text"
-            onChange={playerOneNameHandler}
-            onBlur={playerOneBlurHandler}
-            placeholder="Name of Player 1"
-          ></input>
-          {playerOneNameInputInvalid && (
-            <p className={classes.error}>Name may not be empty</p>
-          )}
-        </Col>
-        <Col md={6}>
-          <input
-            type="text"
-            onChange={playerTwoNameHandler}
-            onBlur={playerTwoBlurHandler}
-            placeholder="Name of Player 2"
-          ></input>
-          {playerTwoNameInputInvalid && (
-            <p className={classes.error}>Name may not be empty</p>
-          )}
-        </Col>
+        <div className={classes.startContainer}>
+          <Col md={3}>
+            <div className={classes.playerOne}>
+              <div>
+                <img src="/img/Player_1.svg" alt="Player 1" />
+              </div>
+              <input
+                type="text"
+                onChange={playerOneNameHandler}
+                onBlur={playerOneBlurHandler}
+                placeholder="Name of Player 1"
+              ></input>
+              {playerOneNameInputInvalid && (
+                <p className={classes.error}>Name may not be empty</p>
+              )}
+            </div>
+          </Col>
+          <Col md={3}>
+            <div className={classes.playerTwo}>
+              <img src="/img/Player_2.svg" alt="Player 2" />
+              <input
+                type="text"
+                onChange={playerTwoNameHandler}
+                onBlur={playerTwoBlurHandler}
+                placeholder="Name of Player 2"
+              ></input>
+              {playerTwoNameInputInvalid && (
+                <p className={classes.error}>Name may not be empty</p>
+              )}
+            </div>
+          </Col>
+        </div>
         <div>
           {" "}
           <button
@@ -84,7 +93,7 @@ const Start = (props) => {
             className={classes.startBtn}
             onClick={newGameHandler}
           >
-            New Game
+            Let's Play
           </button>{" "}
         </div>
       </Row>
