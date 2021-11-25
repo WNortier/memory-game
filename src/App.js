@@ -16,7 +16,7 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const showHeading =
-    useSelector((state) => state.players.notScores) ||
+    useSelector((state) => state.players.showHeading) ||
     JSON.parse(localStorage.getItem("showHeading"));
   const isPlaying =
     useSelector((state) => state.players.isPlaying) ||
