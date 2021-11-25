@@ -13,17 +13,14 @@ import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  // const cards = useSelector((state) => state.cards.cards);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const notScores = useSelector((state) => state.players.notScores);
+  const showHeading =
+    useSelector((state) => state.players.notScores) ||
+    JSON.parse(localStorage.getItem("showHeading"));
   const isPlaying =
     useSelector((state) => state.players.isPlaying) ||
     JSON.parse(localStorage.getItem("isPlaying"));
-
-  useEffect(() => {
-    // dispatch(cardsActions.shuffle());
-  }, []);
 
   const [playerOneName, setPlayerOneName] = useState(null);
   const [playerTwoName, setPlayerTwoName] = useState(null);
@@ -48,15 +45,16 @@ function App() {
   return (
     <Container fluid className="App">
       <Row>
-        {notScores && (
-          <Col md={7}>
-            <div className={classes.main}>
-              <h1>Memory Game</h1>
+        <Col md={4}></Col>
+        {showHeading && (
+          <Col md={4}>
+            <div>
+              <h1 className={classes.heading}>Memory</h1>
             </div>
           </Col>
         )}
-        <Col md={5}>
-          {isPlaying && (
+        {isPlaying && (
+          <Col md={4}>
             <div className={classes.btnGroup}>
               <button
                 className={classes.shuffleBtn}
@@ -74,8 +72,8 @@ function App() {
                 Exit Game
               </button>
             </div>
-          )}
-        </Col>
+          </Col>
+        )}
       </Row>
       <Routes>
         <Route

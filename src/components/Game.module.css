@@ -5,6 +5,7 @@
 }
 
 .deck {
+  margin-top: 15px;
   background: linear-gradient(
     133.05deg,
     rgba(255, 255, 255, 0.6) 0.62%,
@@ -21,9 +22,16 @@
 .playerTwoColumn {
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.playerOneColumn {
+  align-items: flex-end;
+}
+
+.playerTwoColumn {
+  align-items: flex-start;
 }
 
 .playerOne,

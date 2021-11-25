@@ -1,17 +1,17 @@
-.App {
-  /* max-width: 860px; */
-  margin: 40px auto;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,100;1,200&display=swap");
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  background: #68a9d8;
+  color: #fff;
 }
 
 h1 {
   margin: 5px;
   font-weight: bold;
-}
-
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .btnGroup {
@@ -27,7 +27,7 @@ h1 {
 
 .shuffleBtn {
   margin: 50px;
-  background: #f4a236;
+  background: #0ab169;
   border: none;
   padding: 6px 12px;
   border-radius: 4px;

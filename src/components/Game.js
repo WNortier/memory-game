@@ -86,10 +86,11 @@ const Game = (props) => {
 
   useEffect(() => {
     if (playerOneScore + playerTwoScore === 27) {
-      dispatch(playersActions.setIsScores(false));
+      dispatch(playersActions.showHeading(false));
       dispatch(cardsActions.resetCards());
       dispatch(playersActions.setIsPlaying(false));
       localStorage.setItem("isPlaying", false);
+      localStorage.setItem("showHeading", false);
       navigate("/scores", { replace: true });
     }
   }, [choiceOne, choiceTwo]);

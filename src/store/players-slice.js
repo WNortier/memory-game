@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialCardsState = {
   playerOneName: "",
   playerTwoName: "",
-  playerOneScore: 0,
+  playerOneScore: 26,
   playerTwoScore: 0,
   player: "playerOne",
   isPlaying: false,
-  notScores: true,
+  showHeading: true,
 };
 
 const playersSlice = createSlice({
@@ -40,7 +40,7 @@ const playersSlice = createSlice({
     setIsPlaying(state, action) {
       state.isPlaying = action.payload;
     },
-    setIsScores(state, action) {
+    showHeading(state, action) {
       state.notScores = action.payload;
     },
   },

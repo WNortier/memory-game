@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import classes from "./Start.module.css";
 import { useNavigate } from "react-router-dom";
 import { playersActions } from "../store/players-slice";
-import { cardsActions } from "../store/card-slice";
 import { useSelector, useDispatch } from "react-redux";
+
 const Start = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ const Start = (props) => {
     localStorage.setItem("playerOneName", playerOneName);
     localStorage.setItem("playerTwoName", playerTwoName);
     navigate("/game", { replace: true });
-    dispatch(playersActions.setIsPlaying());
+    dispatch(playersActions.setIsPlaying(true));
+    dispatch(playersActions.showHeading(true));
+    localStorage.setItem("showHeading", true);
     localStorage.setItem("isPlaying", true);
   };
 
@@ -60,7 +62,11 @@ const Start = (props) => {
           <Col md={3}>
             <div className={classes.playerOne}>
               <div>
-                <img src="/img/Player_1.svg" alt="Player 1" />
+                <img
+                  src="/img/Player_1.svg"
+                  className={classes.playerOneImg}
+                  alt="Player 1"
+                />
               </div>
               <input
                 type="text"
@@ -76,7 +82,11 @@ const Start = (props) => {
           <Col md={3}>
             <div className={classes.playerTwo}>
               <div>
-                <img src="/img/Player_2.svg" alt="Player 2" />
+                <img
+                  src="/img/Player_2.svg"
+                  className={classes.playerTwoImg}
+                  alt="Player 2"
+                />
               </div>
               <input
                 type="text"

@@ -5,7 +5,7 @@
 }
 
 .heading h1 {
-  margin: 80px;
+  margin-top: 100px;
   font-weight: bold;
 }
 
@@ -39,6 +39,12 @@ input {
 .startBtn:disabled:hover,
 .startBtn:disabled:active {
   cursor: not-allowed;
+}
+
+.playerOneImg,
+.playerTwoImg {
+  margin-top: 75px;
+  margin-bottom: 49px;
 }
 
 .error {

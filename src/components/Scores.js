@@ -21,8 +21,7 @@ const Scores = () => {
     localStorage.getItem("playerTwoName");
   const playerOneScore = useSelector((state) => state.players.playerOneScore);
   const playerTwoScore = useSelector((state) => state.players.playerTwoScore);
-  console.log(playerOneScore);
-  console.log(playerTwoScore);
+
   if (playerOneScore > playerTwoScore) {
     winningScore = playerOneScore;
     losingScore = playerTwoScore;
@@ -34,10 +33,9 @@ const Scores = () => {
     winner = playerTwoName;
     loser = playerOneName;
   }
-  console.log(winner);
 
   const playAgainHandler = () => {
-    dispatch(playersActions.setIsScores(true));
+    dispatch(playersActions.showHeading(true));
     dispatch(playersActions.resetScores());
     navigate("/", { replace: true });
   };
@@ -52,15 +50,22 @@ const Scores = () => {
           </div>
           <img src="/img/Winner.svg" alt="Winner" />
           <div className={classes.results}>
-            <div className={classes.firstPlace}>
+            <div className={classes.firstPlaceContainer}>
               <img
-                src="/img/Player_1.svg"
-                className={classes.scoreImg}
-                alt="Player 1"
+                src="/img/Trophy.svg"
+                className={classes.trophyImg}
+                alt="Trophy"
               />
-              <p>1st Place</p>
-              <p>{winner}</p>
-              <p>Score: {winningScore}</p>
+              <div className={classes.firstPlace}>
+                <img
+                  src="/img/Player_1.svg"
+                  className={classes.scoreImg}
+                  alt="Player 1"
+                />
+                <p>1st Place</p>
+                <p>{winner}</p>
+                <p>Score: {winningScore}</p>
+              </div>
             </div>
             <div className={classes.secondPlace}>
               <img

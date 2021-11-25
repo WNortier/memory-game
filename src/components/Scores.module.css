@@ -29,7 +29,6 @@
 
 .firstPlace,
 .secondPlace {
-  width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,14 +36,18 @@
   padding: 20px;
   color: #0d4477;
   border-radius: 8px;
+  margin-right: 45px;
 }
 
 .firstPlace {
+  /* background-image: url("../Trophy.svg"); */
   background: linear-gradient(92.15deg, #ffd975 35.31%, #ffffff 135.61%);
+  background-repeat: no-repeat;
 }
 
 .secondPlace {
   background: #fff;
+  margin-left: 45px;
 }
 
 .firstPlace p,
@@ -57,6 +60,17 @@
 .scoreImg {
   width: 100px;
   height: 55px;
+}
+
+.trophyImg {
+  width: 35px;
+  margin-right: 15px;
+}
+
+.firstPlaceContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .firstPlace p,
