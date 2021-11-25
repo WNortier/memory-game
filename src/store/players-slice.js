@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialCardsState = {
   playerOneName: "",
   playerTwoName: "",
-  playerOneScore: 26,
+  playerOneScore: 0,
   playerTwoScore: 0,
   player: "playerOne",
   isPlaying: false,
