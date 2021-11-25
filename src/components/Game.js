@@ -33,13 +33,11 @@ const Game = (props) => {
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      console.log("yes");
       if (
         choiceOne.value === choiceTwo.value &&
         choiceOne.color === choiceTwo.color &&
         choiceOne.suit !== choiceTwo.suit
       ) {
-        console.log("match");
         const setMatchedChoiceOne = cards.map((card) => {
           if (card.id === choiceOne.id) {
             return { ...card, matched: true };
@@ -108,7 +106,7 @@ const Game = (props) => {
           <div className={classes.playerOne}>
             <img src="/img/Player_1.svg" alt="Player 1" />
             <h3>{playerOneName}</h3>
-            <p>{playerOneScore}</p>
+            <p>Score: {playerOneScore}</p>
           </div>
           {player === "playerOne" && (
             <div className={classes.playerOneTurn}>
@@ -143,7 +141,7 @@ const Game = (props) => {
           <div className={classes.playerTwo}>
             <img src="/img/Player_2.svg" alt="Player 2" />
             <h3>{playerTwoName}</h3>
-            <p>{playerTwoScore}</p>
+            <p>Score: {playerTwoScore}</p>
           </div>
           <div className={classes.playerTwoTurn}>
             {player === "playerTwo" && <p>It's your turn</p>}

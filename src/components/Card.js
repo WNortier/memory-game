@@ -16,20 +16,33 @@ const Card = (props) => {
   };
 
   return (
+    // <div
+    //   onClick={() => {
+    //     choiceHandler(props.card.id);
+    //   }}
+    //   className={classes.cards}
+    //   style={{ visibility: props.card.matched ? "hidden" : "visible" }}
+    // >
+    //   <div className={props.flipped ? classes.flipped : ""}>
+    //     <div className={classes.front}>
+    //       <p style={style}>{props.card.value}</p>
+    //       <p style={style} className={classes.suit}>
+    //         {props.card.suit}
+    //       </p>
+    //     </div>
+    //   </div>
+    // </div>
     <div
       onClick={() => {
         choiceHandler(props.card.id);
       }}
-      className={classes.cards}
       style={{ visibility: props.card.matched ? "hidden" : "visible" }}
+      className={classes.card}
     >
       <div className={props.flipped ? classes.flipped : ""}>
-        <div className={classes.front}>
-          <p style={style}>{props.card.value}</p>
-          <p style={style} className={classes.suit}>
-            {props.card.suit}
-          </p>
-        </div>
+        <img className={classes.front} src={props.card.src} alt="card front" />
+
+        <img className={classes.back} src="/img/cards/Card_Back.svg" />
       </div>
     </div>
   );

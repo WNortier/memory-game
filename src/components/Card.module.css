@@ -1,33 +1,31 @@
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface");
 
-.cards {
-  font-family: "Abril", sans-serif;
-  display: inline-block;
-  margin: 5px;
-  width: 75px;
-  height: 114px;
-  background-color: white;
-  color: black;
-  border-radius: 10px;
-  padding: 5px;
+.card {
   position: relative;
 }
 
-.cards .front {
-  width: 100%;
+.card:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.card .front {
   transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: absolute;
 }
 
 .flipped .front {
   transform: rotateY(0deg);
+  transition-delay: 0.2s;
 }
 
-.cards:hover {
-  opacity: 0.9;
-  cursor: pointer;
+.card .back {
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
 }
 
-.suit {
-  line-height: 0;
-  font-size: 30px;
+.flipped .back {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
 }
